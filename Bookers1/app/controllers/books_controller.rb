@@ -3,6 +3,8 @@ class BooksController < ApplicationController
   end
 
   def index
+    # Bookモデルのインスタンス 空のモデルオブジェクトを生成しておくことで、DBがnilでも通る
+    @book = Book.new
   end
 
   def show
@@ -12,6 +14,12 @@ class BooksController < ApplicationController
   end
 
   def create
+    # ストロングパラメータを設定
+    book = Book.new(book_params)
+    # DBへ保存する
+    book.save
+    # 投稿が完了したらindexへリダイレクトさせる
+    redirect_to '/books'
   end
 
   def destroy
@@ -19,4 +27,11 @@ class BooksController < ApplicationController
 
   def update
   end
+
+  # ストロングパラメーター
+  private
+    def book_params
+      params.require(:book).permit(:title,:body)
+    end
+
 end
