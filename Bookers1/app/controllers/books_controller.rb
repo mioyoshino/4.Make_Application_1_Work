@@ -11,6 +11,8 @@ class BooksController < ApplicationController
   end
 
   def show
+    # idで、Bookモデルから1件のレコードを取得
+    @book = Book.find(params[:id])
   end
 
   def edit
