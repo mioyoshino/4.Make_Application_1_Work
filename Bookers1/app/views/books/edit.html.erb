@@ -1,3 +1,7 @@
+<% if flash[:alert] %>
+  <p><%= flash[:alert] %></p>
+<% end %>
+
 <h1>Editting Book</h1>
 <%= form_for(@book, url: book_path(@book.id)) do |f| %>
 
