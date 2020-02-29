@@ -21,7 +21,7 @@
 </table>
 <h2>New book</h2>
 
-<%= form_for(@book, url: '/books') do |f| %>
+<%= form_for(@book, url: books_path) do |f| %>
 
     <div>Title</div>
     <%= f.text_field :title %>
@@ -32,5 +32,3 @@
     <%= f.submit 'Create Book' %>
 
 <% end %> 
-
-</table>

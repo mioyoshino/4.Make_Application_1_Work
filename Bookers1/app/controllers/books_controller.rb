@@ -16,6 +16,8 @@ class BooksController < ApplicationController
   end
 
   def edit
+    # idで、Bookモデルから1件のレコードを取得
+    @book = Book.find(params[:id])
   end
 
   def create
@@ -24,13 +26,18 @@ class BooksController < ApplicationController
     # DBへ保存する
     book.save
     # 投稿が完了したらindexへリダイレクトさせる
-    redirect_to '/books'
-  end
-
-  def destroy
+    redirect_to books_path
   end
 
   def update
+    book = Book.find(params[:id])
+    book.update(book_params)
+
+    redirect_to book_path(book.id)
+
+  end
+
+  def destroy
   end
 
   # ストロングパラメーター
