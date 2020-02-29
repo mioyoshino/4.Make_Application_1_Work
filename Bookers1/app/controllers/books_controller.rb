@@ -5,6 +5,9 @@ class BooksController < ApplicationController
   def index
     # Bookモデルのインスタンス 空のモデルオブジェクトを生成しておくことで、DBがnilでも通る
     @book = Book.new
+
+    # 一覧取得
+    @books = Book.all
   end
 
   def show
