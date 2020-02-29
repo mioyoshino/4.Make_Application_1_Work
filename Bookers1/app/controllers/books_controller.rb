@@ -27,7 +27,7 @@ class BooksController < ApplicationController
     # 投稿成功後のサクセスメッセージを設定
     # DBへ保存する
     if book.save
-      redirect_to books_path, notice: "successfully"
+      redirect_to book_path(book.id), notice: "Book was successfully created."
     else
       render action: :create
     end
@@ -39,15 +39,23 @@ class BooksController < ApplicationController
     
     # 更新成功後のサクセスメッセージを設定
     if book.update(book_params)
-       redirect_to book_path(book), notice: "successfully"
-     else
-       flash.now[:alert] = 'failed'
-       render edit_book_path(book)
+        redirect_to book_path(book), notice: 'Book was successfully updated.'
+    else
+        flash.now[:alert] = 'failed'
+        render edit_book_path(book)
      end
 
   end
 
   def destroy
+    book = Book.find(params[:id])
+    # レコードを削除
+    if book.destroy
+        redirect_to books_path, notice: 'Book was successfully destroyed.'
+    else
+      render action: :index
+    end
+
   end
 
   # ストロングパラメーター
